@@ -1,0 +1,56 @@
+Edge cases:
+
+1. User Activity Spanning Multiple Days: If a user remains active beyond a single day but within the session timeout window (cross-day sessions).
+Solution:
+Focus on the time difference between events rather than the date. If the time difference between consecutive events is less than the session timeout, 
+treat it as a single continuous session, even if the interaction spills over into the next calendar day.
+
+
+2. Different Devices: If a user accesses the website from multiple devices (different user-agent values), separating sessions per device or handling them as a single session if they occur close in time might be an option.
+Solutions: 
+
+a. Sessions across different devices should be merged (i.e., consider it part of the same user journey).
+b. Sessions from different devices should be separated, treating them as distinct sessions.
+c. Combined approach: If a user switches devices within a very short period (e.g., less than 2 minutes), merge the sessions.
+    If the switch happens after a longer period, split the sessions.
+
+Most important decision is the session_timeout.
+
+Business Considerations and User Behavior:
+The session timeout should also be aligned with the nature of the business and the user behavior expected on the site.
+
+Type of Interaction: If users are mostly browsing or exploring (e.g., an e-commerce site), 
+                     a shorter session timeout like 15-30 minutes might be appropriate, as users tend to make decisions quickly.
+
+Complex Tasks: If users engage in complex tasks (e.g., reading long articles, watching videos, or comparing products), 
+               a longer timeout (e.g., 30-60 minutes) might be more appropriate.
+
+Industry Benchmarks: Compare sessionization strategy to industry standards. 
+                     For example, e-commerce websites often use a 30-minute timeout, 
+                     but some platforms (like social networks or educational platforms) may allow longer timeouts, up to 60 minutes.
+
+
+
+
+From the session duration plots here are the key observations and takeaways:
+
+1. High Frequency of Short Sessions:
+Across all the plots (for different session timeouts), there is a very high concentration of sessions that last less than 1 minute.
+This indicates that a significant portion of users interact with the website in a very short burst, possibly quickly checking something or leaving after a single or a few actions.
+
+2. Long Tail of Sessions:
+After the 1-minute mark, the session frequency drops significantly, but there is a long tail of sessions lasting up to 30 minutes or more.
+These longer sessions are much less frequent but could represent engaged users who are spending more time on the site (e.g., browsing products, reading content).
+
+3. Similar Shape Across Different Timeouts:
+The overall shape of the session duration distribution is similar across different timeouts (5 to 10 minutes), which indicates that most sessions are short regardless of the session timeout value.
+However, a shorter timeout (like 5 minutes) leads to slightly more sessions being broken up, compared to a longer timeout (10 minutes), where more sessions are captured as longer durations.
+
+4. Diminishing Returns Beyond 10 Minutes:
+The results suggest that most meaningful user activity happens within the first few minutes. Therefore, using a timeout of more than 10 minutes might not add significant value, as the longer sessions do not significantly increase after this point.
+5 to 10 minutes seems to be a good range for session timeout based on the data. A longer timeout could be useful to merge very occasional actions into one session, but a shorter timeout (5 minutes) seems to capture most real user engagement.
+
+
+A session timeout of 5 to 7 minutes would likely capture most user behavior without splitting sessions unnecessarily.
+A more conservative approach of 10 minutes could be a safe upper limit, but anything beyond that appears to add diminishing returns based on the long tail of session durations.
+Thus, a session timeout of 8 minutes would be the middle-ground
