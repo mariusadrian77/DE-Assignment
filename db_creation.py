@@ -51,7 +51,6 @@ def create_db_table():
             user_agent TEXT,
             ip VARCHAR(50),
             query TEXT,
-            url TEXT,
             page TEXT,
             referrer TEXT,
             session_id INT

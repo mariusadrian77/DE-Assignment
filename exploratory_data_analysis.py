@@ -36,7 +36,6 @@ def fetch_and_transform_data():
             'user_agent': event['event']['user-agent'],
             'ip': event['event']['ip'],
             'query': event['event'].get('query', None),
-            'url': event['event'].get('url', None),
             'page': event['event'].get('page', None),
             'referrer': event['event'].get('referrer', None)
         } for event in filtered_events])
@@ -122,7 +121,7 @@ def analyze_session_durations(df,session_timeout):
     session_durations['session_length'].hist(bins=120, range=(0, 40))
     
     # Show the plot
-    plt.xlabel('Session Duration (Minutes)')
+    plt.xlabel(f'Session Duration {session_timeout} (Minutes)')
     plt.ylabel('Frequency')
     plt.title('Distribution of Session Durations')
     plt.xticks(range(0, 45, 1), rotation = 45)  # X-axis ticks every 1 minute for granularity

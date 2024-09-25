@@ -1,3 +1,4 @@
 # Environment variables file containing login credentials
 .env
 /workspaces/de-assessment-mariusadrian77/__pycache__/
+/workspaces/de-assessment-mariusadrian77/.pytest_cache

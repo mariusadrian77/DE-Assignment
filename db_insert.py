@@ -39,7 +39,7 @@ def copy_dataframe_to_db(db_url_key, dataframe, table_name):
     # Perform the COPY operation
     try:
         copy_sql = f"""
-        COPY {table_name} (id, event_type, timestamp, customer_id, user_agent, ip, query, url, page, referrer, session_id)
+        COPY {table_name} (id, event_type, timestamp, customer_id, user_agent, ip, query, page, referrer, session_id)
         FROM stdin WITH CSV DELIMITER ',' NULL 'None' ESCAPE '\\';
         """
         cursor.copy_expert(copy_sql, csv_buffer)
